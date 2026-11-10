@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Registration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Student Examination Registration</h2>
+
+    <form id="regForm">
+        <label>Student Name</label>
+        <input type="text" id="name" placeholder="Enter Student Name">
+
+        <label>Register Number</label>
+        <input type="text" id="regno" placeholder="Enter Register Number">
+
+        <label>Course</label>
+        <input type="text" id="course" placeholder="Enter Course">
+
+        <label>Attendance (%)</label>
+        <input type="number" id="attendance" placeholder="Enter Attendance">
+
+        <button type="button" onclick="validateForm()">Register</button>
+    </form>
+
+    <p id="result"></p>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

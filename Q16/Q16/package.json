@@ -1,0 +1,22 @@
+{
+  "name": "q16-candidate-interview-profile",
+  "version": "1.0.0",
+  "description": "Candidate profile web application for job interview using React JS",
+  "private": true,
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "keywords": [
+    "react",
+    "candidate",
+    "profile",
+    "interview"
+  ],
+  "author": "Student",
+  "license": "ISC"
+}

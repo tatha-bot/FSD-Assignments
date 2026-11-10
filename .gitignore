@@ -1,0 +1,70 @@
+# ==============================================================================
+# Full Stack Development Laboratory - Git Ignore Configuration
+# ==============================================================================
+
+# Dependencies (Node / JavaScript)
+node_modules/
+*/node_modules/
+*/*/node_modules/
+*/*/*/node_modules/
+package-lock.json
+!Q17/Q17/client/package.json
+!Q17/Q17/server/package.json
+!Q18/Q18/client/package.json
+!Q18/Q18/server/package.json
+!Q19/Q19/frontend/package.json
+!Q19/Q19/backend/package.json
+!Q20/Q20/frontend/package.json
+!Q20/Q20/backend/package.json
+
+# Build Outputs
+dist/
+*/dist/
+*/*/dist/
+*/*/*/dist/
+build/
+*/build/
+*/*/build/
+*/*/*/build/
+out/
+.next/
+
+# Environment Variables & Secrets
+.env
+.env.local
+.env.*.local
+*.env
+*/.env
+*/*/.env
+*/*/*/.env
+!.env.example
+!*/.env.example
+!*/*/.env.example
+!*/*/*/.env.example
+
+# Logs & Debugging
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+logs/
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+[Dd]esktop.ini
+
+# IDE & Editor Configurations
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

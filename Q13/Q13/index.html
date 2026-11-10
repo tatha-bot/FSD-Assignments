@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Q13: React JS Calculator</title>
+  <!-- React & Babel CDNs for instant execution -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #0f172a;
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .calculator-wrapper { width: 100%; max-width: 380px; }
+    .calculator-card {
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+    .calculator-header { text-align: center; margin-bottom: 20px; }
+    .calculator-header h3 { color: #38bdf8; font-size: 1.4rem; font-weight: 700; }
+    .calculator-header .subtext { color: #94a3b8; font-size: 0.85rem; }
+    .calculator-screen {
+      background: #090d16;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+      text-align: right;
+      min-height: 85px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .screen-history { color: #64748b; font-size: 0.9rem; min-height: 18px; font-family: monospace; }
+    .screen-main {
+      color: #ffffff;
+      font-size: 2.2rem;
+      font-weight: 700;
+      font-family: monospace;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .calculator-keypad {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .btn {
+      border: none;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding: 16px 0;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+    .btn:active { transform: scale(0.96); }
+    .btn-num { background: #334155; color: #f8fafc; }
+    .btn-num:hover { background: #475569; }
+    .btn-action { background: #ef4444; color: #ffffff; }
+    .btn-action:hover { background: #dc2626; }
+    .btn-operator { background: #0284c7; color: #ffffff; }
+    .btn-operator:hover { background: #0369a1; }
+    .btn-equals { background: #10b981; color: #ffffff; }
+    .btn-equals:hover { background: #059669; }
+    .btn-zero { grid-column: span 2; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    function App() {
+      const [display, setDisplay] = useState('0');
+      const [prevValue, setPrevValue] = useState(null);
+      const [operator, setOperator] = useState(null);
+      const [waitingForOperand, setWaitingForOperand] = useState(false);
+
+      const inputDigit = (digit) => {
+        if (waitingForOperand) {
+          setDisplay(String(digit));
+          setWaitingForOperand(false);
+        } else {
+          setDisplay(display === '0' ? String(digit) : display + digit);
+        }
+      };
+
+      const inputDot = () => {
+        if (waitingForOperand) {
+          setDisplay('0.');
+          setWaitingForOperand(false);
+        } else if (!display.includes('.')) {
+          setDisplay(display + '.');
+        }
+      };
+
+      const clearAll = () => {
+        setDisplay('0');
+        setPrevValue(null);
+        setOperator(null);
+        setWaitingForOperand(false);
+      };
+
+      const deleteLast = () => {
+        if (waitingForOperand) return;
+        if (display.length > 1) {
+          setDisplay(display.slice(0, -1));
+        } else {
+          setDisplay('0');
+        }
+      };
+
+      const calculate = (firstVal, secondVal, op) => {
+        switch (op) {
+          case '+': return firstVal + secondVal;
+          case '-': return firstVal - secondVal;
+          case '*': return firstVal * secondVal;
+          case '/': return secondVal === 0 ? 'Error' : firstVal / secondVal;
+          case '%': return firstVal % secondVal;
+          default: return secondVal;
+        }
+      };
+
+      const performOperation = (nextOperator) => {
+        const inputValue = parseFloat(display);
+
+        if (prevValue === null) {
+          setPrevValue(inputValue);
+        } else if (operator) {
+          const currentValue = prevValue || 0;
+          const result = calculate(currentValue, inputValue, operator);
+          if (result === 'Error') {
+            setDisplay('Error');
+            setPrevValue(null);
+            setOperator(null);
+            setWaitingForOperand(true);
+            return;
+          }
+          setDisplay(String(result));
+          setPrevValue(result);
+        }
+
+        setWaitingForOperand(true);
+        setOperator(nextOperator);
+      };
+
+      const handleEquals = () => {
+        const inputValue = parseFloat(display);
+
+        if (operator && prevValue !== null) {
+          const result = calculate(prevValue, inputValue, operator);
+          if (result === 'Error') {
+            setDisplay('Error');
+          } else {
+            setDisplay(String(result));
+          }
+          setPrevValue(null);
+          setOperator(null);
+          setWaitingForOperand(true);
+        }
+      };
+
+      return (
+        <div className="calculator-wrapper">
+          <div className="calculator-card">
+            <div className="calculator-header">
+              <h3>React Calculator</h3>
+              <span className="subtext">Assignment Q13 - All Arithmetic Operations</span>
+            </div>
+
+            <div className="calculator-screen">
+              <div className="screen-history">
+                {prevValue !== null && operator ? `${prevValue} ${operator}` : ''}
+              </div>
+              <div className="screen-main">{display}</div>
+            </div>
+
+            <div className="calculator-keypad">
+              <button className="btn btn-action" onClick={clearAll}>AC</button>
+              <button className="btn btn-action" onClick={deleteLast}>DEL</button>
+              <button className="btn btn-operator" onClick={() => performOperation('%')}>%</button>
+              <button className="btn btn-operator" onClick={() => performOperation('/')}>÷</button>
+
+              <button className="btn btn-num" onClick={() => inputDigit(7)}>7</button>
+              <button className="btn btn-num" onClick={() => inputDigit(8)}>8</button>
+              <button className="btn btn-num" onClick={() => inputDigit(9)}>9</button>
+              <button className="btn btn-operator" onClick={() => performOperation('*')}>×</button>
+
+              <button className="btn btn-num" onClick={() => inputDigit(4)}>4</button>
+              <button className="btn btn-num" onClick={() => inputDigit(5)}>5</button>
+              <button className="btn btn-num" onClick={() => inputDigit(6)}>6</button>
+              <button className="btn btn-operator" onClick={() => performOperation('-')}>−</button>
+
+              <button className="btn btn-num" onClick={() => inputDigit(1)}>1</button>
+              <button className="btn btn-num" onClick={() => inputDigit(2)}>2</button>
+              <button className="btn btn-num" onClick={() => inputDigit(3)}>3</button>
+              <button className="btn btn-operator" onClick={() => performOperation('+')}>+</button>
+
+              <button className="btn btn-num btn-zero" onClick={() => inputDigit(0)}>0</button>
+              <button className="btn btn-num" onClick={inputDot}>.</button>
+              <button className="btn btn-equals" onClick={handleEquals}>=</button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>

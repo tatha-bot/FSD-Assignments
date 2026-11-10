@@ -1,0 +1,17 @@
+{
+  "name": "q10-employee-salary-increment",
+  "version": "1.0.0",
+  "description": "MongoDB query to increment salary of all employees by 1000",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "mongodb",
+    "updateMany",
+    "inc",
+    "nodejs"
+  ],
+  "author": "Student",
+  "license": "ISC"
+}

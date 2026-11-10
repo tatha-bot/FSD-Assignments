@@ -1,0 +1,24 @@
+{
+  "name": "hospital-daily-wage-mern-app",
+  "version": "1.0.0",
+  "description": "Hospital Administration Daily Wage Employees Salary Management System using MERN Stack",
+  "scripts": {
+    "server": "cd server && npm start",
+    "client": "cd client && npm run dev",
+    "dev": "node -e \"const { spawn } = require('child_process'); const s = spawn('npm', ['run', 'start'], { cwd: './server', stdio: 'inherit' }); const c = spawn('npm', ['run', 'dev'], { cwd: './client', stdio: 'inherit' });\"",
+    "build": "cd client && npm run build",
+    "install:all": "cd server && npm install && cd ../client && npm install"
+  },
+  "keywords": [
+    "mern",
+    "hospital-administration",
+    "daily-wage",
+    "salary-management",
+    "react",
+    "express",
+    "mongodb",
+    "node"
+  ],
+  "author": "Hospital Payroll Administration",
+  "license": "ISC"
+}

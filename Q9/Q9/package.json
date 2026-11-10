@@ -1,0 +1,17 @@
+{
+  "name": "q9-student-course-registration",
+  "version": "1.0.0",
+  "description": "Student course registration database with MongoDB CRUD operations",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "mongodb",
+    "crud",
+    "fullstack",
+    "nodejs"
+  ],
+  "author": "Student",
+  "license": "ISC"
+}

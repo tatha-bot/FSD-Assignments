@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Library Book Lending & Returning</h2>
+
+    <form>
+        <label>Student Name</label>
+        <input type="text" id="name" placeholder="Enter Student Name">
+
+        <label>Student ID</label>
+        <input type="text" id="sid" placeholder="Enter Student ID">
+
+        <label>Age</label>
+        <input type="number" id="age" placeholder="Enter Age">
+
+        <label>Book Name</label>
+        <input type="text" id="book" placeholder="Enter Book Name">
+
+        <label>Operation</label>
+        <select id="operation">
+            <option value="">Select</option>
+            <option value="Lend">Lend Book</option>
+            <option value="Return">Return Book</option>
+        </select>
+
+        <button type="button" onclick="validateForm()">Submit</button>
+    </form>
+
+    <p id="result"></p>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

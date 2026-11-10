@@ -1,0 +1,19 @@
+{
+  "name": "q11-student-marks-aggregation",
+  "version": "1.0.0",
+  "description": "MongoDB aggregation pipeline to sort marks, group by student name, and find sum of marks",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "mongodb",
+    "aggregation",
+    "group",
+    "sort",
+    "sum",
+    "nodejs"
+  ],
+  "author": "Student",
+  "license": "ISC"
+}

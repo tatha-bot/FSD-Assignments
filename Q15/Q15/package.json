@@ -1,0 +1,22 @@
+{
+  "name": "q15-react-greeting-app",
+  "version": "1.0.0",
+  "description": "Greeting application based on current time using React JS",
+  "private": true,
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "keywords": [
+    "react",
+    "greeting",
+    "clock",
+    "time"
+  ],
+  "author": "Student",
+  "license": "ISC"
+}
